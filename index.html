@@ -256,7 +256,15 @@
 
               <label class="form_label">
                 Email
-                <input class="form_input" name="email" type="email" required />
+                <input
+                  class="form_input"
+                  name="email"
+                  type="email"
+                  inputmode="email"
+                  autocomplete="email"
+                  pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$"
+                  required
+                />
               </label>
             </div>
 

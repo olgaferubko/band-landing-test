@@ -114,6 +114,9 @@ document.addEventListener('click', e => {
 
 const contactForm = document.getElementById('contactForm');
 
+const EMAIL_ASCII = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+const HAS_NON_ASCII = /[^\x00-\x7F]/;
+
 if (contactForm) {
   contactForm.addEventListener('submit', async e => {
     e.preventDefault();
@@ -129,9 +132,13 @@ if (contactForm) {
       if (box) box.textContent = text || '';
     };
 
-
     if (name.length < 2) { setErr('name', 'Мінімум 2 символи'); ok = false; } else setErr('name', '');
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { setErr('email', 'Невірний email'); ok = false; } else setErr('email', '');
+
+    if (HAS_NON_ASCII.test(email) || !EMAIL_ASCII.test(email)) {
+      setErr('email', 'Лише латиниця: name.surname+tag@domain.com');
+      ok = false;
+    } else setErr('email', '');
+
     if (msg.length < 5) { setErr('message', 'Мінімум 5 символів'); ok = false; } else setErr('message', '');
 
     if (!ok) return;
@@ -141,11 +148,8 @@ if (contactForm) {
 
     try { await fetch(`${window.location.pathname}?${params}`, { method: 'GET', keepalive: true }); } catch {}
 
-
     history.replaceState(null, '', url);
-
     showToastTop('Повідомлення надіслано ✅', 'success');
     f.reset();
-
   });
 }
