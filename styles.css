@@ -207,7 +207,7 @@ table {
     justify-content: center;
     padding: 0 20px;
     color: #ffffff;
-    background: url("./images/hero.png") center/cover no-repeat;
+    background: url("./images/hero.jpg") center/cover no-repeat;
 }
 
 .hero::after {
