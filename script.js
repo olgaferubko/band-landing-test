@@ -135,7 +135,7 @@ if (contactForm) {
     if (name.length < 2) { setErr('name', 'Мінімум 2 символи'); ok = false; } else setErr('name', '');
 
     if (HAS_NON_ASCII.test(email) || !EMAIL_ASCII.test(email)) {
-      setErr('email', 'Лише латиниця: name.surname+tag@domain.com');
+      setErr('email', 'example@gmail.com');
       ok = false;
     } else setErr('email', '');
 
